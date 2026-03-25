@@ -1,7 +1,7 @@
 {
   description = "Orca Slicer package flake (based on nixpkgs orca-slicer)";
 
-  inputs = { nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11"; };
+  inputs = { nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; };
 
   outputs = { self, nixpkgs }:
     let

@@ -3,11 +3,11 @@
 , ffmpeg, gcc-unwrapped, glew, glfw, glib, glib-networking, gmp, gst_all_1
 , gtest, gtk3, hicolor-icon-theme, ilmbase, libsecret, libpng, mpfr, nlopt
 , opencascade-occt_7_6, openvdb, opencv, pcre, systemd, onetbb, webkitgtk_4_1
-, wxGTK31, xorg, libnoise, orcaVersion ? "2.3.1"
+, wxwidgets_3_1, xorg, libnoise, orcaVersion ? "2.3.1"
 , orcaSrcHash ? "sha256-RdMBx/onLq58oI1sL0cHmF2SGDfeI9KkPPCbjyMqECI="
 , withSystemd ? stdenv.hostPlatform.isLinux, }:
 let
-  wxGTK' = (wxGTK31.override {
+  wxGTK' = (wxwidgets_3_1.override {
     withCurl = true;
     withEGL = false;
     withPrivateFonts = true;
@@ -69,7 +69,7 @@ in stdenv.mkDerivation (finalAttrs: {
     onetbb
     webkitgtk_4_1
     wxGTK'
-    xorg.libX11
+    libX11
     opencv.cxxdev
     libnoise
   ] ++ lib.optionals withSystemd [ systemd ] ++ finalAttrs.checkInputs;
