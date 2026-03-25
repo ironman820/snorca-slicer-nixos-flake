@@ -16,7 +16,7 @@ print_error() { echo -e "${RED}[ERROR]${NC} $1"; }
 release_channel=${ORCA_RELEASE_CHANNEL:-latest}
 
 if [[ ! -f "flake.nix" ]]; then
-  print_error "This script must be run from the orca-slicer-nixos-flake directory"
+  print_error "This script must be run from the snorca-slicer-nixos-flake directory"
   exit 1
 fi
 
@@ -27,10 +27,10 @@ for cmd in curl jq nix nix-prefetch-url; do
   fi
 done
 
-print_info "Orca Slicer Package Flake Updater"
+print_info "SnOrca Slicer Package Flake Updater"
 print_info "Fetching latest release metadata..."
 
-json=$(curl -fsSL "https://api.github.com/repos/OrcaSlicer/OrcaSlicer/releases?per_page=10")
+json=$(curl -fsSL "https://api.github.com/repos/Snapmaker/OrcaSlicer/releases?per_page=10")
 version_tag_filter='.tag_name | test("^v?[0-9]+\\.[0-9]+\\.[0-9]+([.-][A-Za-z0-9]+)*$")'
 
 case "$release_channel" in
@@ -59,7 +59,7 @@ if [[ -z "$new_tag" || "$new_tag" == "null" ]]; then
 fi
 
 new_version=${new_tag#v}
-src_url="https://github.com/OrcaSlicer/OrcaSlicer/archive/refs/tags/${new_tag}.tar.gz"
+src_url="https://github.com/Snapmaker/OrcaSlicer/archive/refs/tags/${new_tag}.tar.gz"
 
 current_version=$(grep -o 'version = "[^"]*";' flake.nix | head -1 | sed 's/version = "//;s/";//')
 current_src_hash=$(grep -o 'srcHash = "[^"]*";' flake.nix | head -1 | sed 's/srcHash = "//;s/";//')
